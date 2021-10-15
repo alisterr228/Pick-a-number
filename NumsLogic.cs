@@ -8,7 +8,6 @@ public class NumsLogic : MonoBehaviour
     public List<Text> NumsTxt = new List<Text>();
     public Slider _timeCount;
     public GameObject timeOutPanel;
-    private ButtonSettings bs;
     private saveData sd;
 
     public Text globalNum;
@@ -25,12 +24,19 @@ public class NumsLogic : MonoBehaviour
 
     System.Random rand = new System.Random();
 
+    public int[] PubNumsLength
+    {
+        get
+        {
+            return numsLength;
+        }
+    }
+
     void Start()
     {
         MixNums();
 
         sd = gameObject.GetComponent<saveData>();
-        bs = gameObject.GetComponent<ButtonSettings>();
     }
 
     private void Update()
@@ -50,7 +56,7 @@ public class NumsLogic : MonoBehaviour
             sd.PubSave();
         }
 
-        if (bs.pubCount == numsLength[i] && time > 0)
+        if (buttonDown.PubCount == numsLength[i] && time > 0)
         {
             i = rand.Next(0, numsLength.Length-1);
 
@@ -68,9 +74,6 @@ public class NumsLogic : MonoBehaviour
         globalNum.text = numsLength[i] + "";
         recordScoreTxt.text = sd.PubRecordScore + "";
         _timeCount.value = time;
-
-        for (int i = 0; i < numsLength.Length; i++)
-            bs.pubNumsLength[i] = numsLength[i];
     }
 
 
