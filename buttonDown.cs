@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class buttonDown : MonoBehaviour
 {
     public Button buttonVal;
+    public AudioClip ac;
+    private AudioSource _as;
     private NumsLogic nl;
 
     public int index;
@@ -23,12 +25,15 @@ public class buttonDown : MonoBehaviour
     private void Start()
     {
         nl = GetComponentInParent<NumsLogic>();
+        _as = gameObject.GetComponent<AudioSource>();
         buttonVal.onClick.AddListener(ButtonDown);
     }
 
     private void ButtonDown()
     {
-        if(index >=0 && index < 25)
+        _as.PlayOneShot(ac);
+
+        if (index >=0 && index < 25)
             count = nl.PubNumsLength[index];
     }
 }
